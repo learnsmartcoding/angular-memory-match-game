@@ -1,0 +1,61 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <label>Category</label>
+            <select class="form-control" [(ngModel)]="category">
+                <option value="animals">Animals</option>
+                <option value="transport">Car & Truck</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label>Game Cards</label>
+            <select class="form-control" [(ngModel)]="gameCards">
+                <option value="2">Play 4 cards</option>
+                <option value="4">Play 8 cards</option>
+                <option value="6">Play 12 cards</option>
+                <option value="8">Play 16 cards</option>
+                <option value="10">Play 20 cards</option>
+                <option value="15">Play 30 cards</option>
+                <option value="20">Play 40 cards</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <br>
+            <button (click)="startGame()" class="btn btn-success">Start Game</button>&nbsp;
+            <button (click)="showAll()" class="btn btn-primary">Show All</button>
+        </div>
+        <div class="col-md-3"><br>
+            <h4 *ngIf="noOfMoves"># of Attempts: {{noOfMoves}}</h4>
+        </div>
+
+    </div>
+    <br>
+    <div *ngIf="gameOver">
+        <img src="./../../../assets/youwon.png" alt="You Won!"  />
+  <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-3" *ngFor="let item of images">
+            <div class="flip-card cursor" [ngClass]="{'flip-card-inner-click':item.clickCount}"
+                (click)="onClickOfImage(item)">
+                <div class="flip-card-inner">
+                    <div class="{{item.cardBack}}">
+                        <img src="{{item.imagePath}}" alt="Image" style="width:300px;height:300px;">
+
+                    </div>
+                    <div class="{{item.cardFront}}">
+                        <br><br>
+                        <h1>Guess Me</h1>
+                        <br><br>
+                        <p>{{category | titlecase}}</p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
