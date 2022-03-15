@@ -15,7 +15,7 @@ export class GameComponent implements OnInit {
   gameCards = '2';
   category = 'transport';
   noOfMoves = 0;
-  gameOver=false;
+  gameOver = false;
   constructor() {}
 
   ngOnInit(): void {}
@@ -26,7 +26,7 @@ export class GameComponent implements OnInit {
 
   startGame() {
     this.images = [];
-    this.gameOver=false;
+    this.gameOver = false;
     this.noOfMoves = 0;
     const imageCountsToLoad = +this.gameCards;
     const allMixedImages: string[] = this.shuffle(
@@ -114,7 +114,7 @@ export class GameComponent implements OnInit {
   onClickOfImage(image: ImageDetail) {
     let imageClicked = <ImageDetail>this.images.find((f) => f.id === image.id);
 
-    if (imageClicked.id !== this.lastClickedId) {
+    if (imageClicked.id !== this.lastClickedId && !this.gameOver) {
       this.noOfMoves = this.noOfMoves + 1;
       this.lastClickedId = imageClicked.id;
       imageClicked.clickCount = 1;
@@ -144,8 +144,8 @@ export class GameComponent implements OnInit {
       }
     }
 
-    if(this.images.filter(f=>!f.matched).length===0){
-      this.gameOver=true;
+    if (this.images.filter((f) => !f.matched).length === 0) {
+      this.gameOver = true;
     }
   }
 
@@ -156,5 +156,9 @@ export class GameComponent implements OnInit {
       f.cardBack = 'flip-card-front';
       f.cardFront = 'flip-card-back';
     });
+  }
+
+  getNoOfAttempts() {
+    return Math.round(this.noOfMoves / 2);
   }
 }

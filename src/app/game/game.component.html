@@ -26,7 +26,7 @@
             <button (click)="showAll()" class="btn btn-primary">Show All</button>
         </div>
         <div class="col-md-3"><br>
-            <h4 *ngIf="noOfMoves"># of Attempts: {{noOfMoves}}</h4>
+            <h4 *ngIf="noOfMoves">Moves: {{getNoOfAttempts()}} , Clicks: {{noOfMoves}}</h4>
         </div>
 
     </div>
